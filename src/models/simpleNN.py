@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader, Dataset, random_split
 from visualizer.visualizer import TrainingVisualizer
 from models.model_definitions import SimpleNN
 
-EPOCH = 10
+EPOCH = 20
 
 class PreprocessedDataset(Dataset):
     def __init__(self, data_dict):
@@ -98,4 +98,4 @@ if __name__ == "__main__":
     print(f"Общее время обучения: {minutes} мин {seconds} сек")
 
     visualizer.plot(save_path=r'D:\GitHubRepo\ASL-coursework\reports\figures\training_plot.png')
-    torch.save(model.state_dict(), r"D:\GitHubRepo\ASL-coursework\src\models\simple_asl_model.pth")
+    torch.save(model.state_dict(), r"D:\GitHubRepo\ASL-coursework\src\models\simpleNN.pth")

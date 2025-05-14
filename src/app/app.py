@@ -100,7 +100,6 @@ class ASLTranslatorApp:
         file_path = filedialog.askopenfilename(filetypes=[("PyTorch Model", "*.pth")])
         if file_path:
             try:
-                # Инициализация модели
                 if "mp" in self.current_model_type:
                     self.init_mediapipe()
 
