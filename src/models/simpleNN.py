@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader, Dataset, random_split
 from visualizer.visualizer import TrainingVisualizer
 from models.model_definitions import SimpleNN
 
-EPOCH = 20
+EPOCH = 5
 
 class PreprocessedDataset(Dataset):
     def __init__(self, data_dict):
@@ -37,6 +37,7 @@ print("DONE")
 start_time = time.time()
 
 if __name__ == "__main__":
+
     model = SimpleNN()
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=0.01)

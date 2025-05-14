@@ -1,7 +1,8 @@
+import random
 import torch
 from torchvision import transforms, datasets
 import os
-from tqdm import tqdm  # Добавляем импорт
+from tqdm import tqdm
 
 
 class ASLPreprocessor:
@@ -36,6 +37,8 @@ class ASLPreprocessor:
                 })
 
         progress_bar.close()
+
+        random.shuffle(processed_data)
 
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
         torch.save({
