@@ -1,5 +1,6 @@
 import torch
 import time
+from tqdm import tqdm
 import torch.nn as nn
 from torch.utils.data import DataLoader, Dataset, random_split
 from visualizer.visualizer import TrainingVisualizer
@@ -48,7 +49,7 @@ if __name__ == "__main__":
         correct_train = 0
         total_train = 0
 
-        for images, labels in train_loader:
+        for images, labels in tqdm(train_loader, desc=f"Обучение [{epoch+1}/{EPOCH}]", leave=False):
             outputs = model(images)
             loss = criterion(outputs, labels)
 
@@ -67,7 +68,7 @@ if __name__ == "__main__":
         total_val = 0
 
         with torch.no_grad():
-            for images, labels in val_loader:
+            for images, labels in tqdm(val_loader, desc="Валидация", leave=False):
                 outputs = model(images)
                 loss = criterion(outputs, labels)
 

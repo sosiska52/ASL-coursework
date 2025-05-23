@@ -1,5 +1,6 @@
 import torch
 import time
+import tqdm
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
@@ -10,7 +11,7 @@ from visualizer.visualizer import TrainingVisualizer
 EPOCHS = 5
 BATCH_SIZE = 32
 LR = 1e-3
-PROCESSED_PATH = r'D:\GitHubRepo\ASL-coursework\src\data\processed\ASL_Alphabet_Dataset\asl_alphabet_train'
+PROCESSED_PATH = r'D:\GitHubRepo\ASL-coursework\src\data\processed\ASL_Alphabet_Dataset\asl_alphabet_train.pt'
 SAVE_MODEL_PATH = r"D:\GitHubRepo\ASL-coursework\src\models\simpleCNN.pth"
 SAVE_PLOT_PATH = r'D:\GitHubRepo\ASL-coursework\reports\figures\training_plot_cnn.png'
 
@@ -65,7 +66,7 @@ if __name__ == "__main__":
         model.train()
         train_loss, correct_train, total_train = 0.0, 0, 0
 
-        for images, labels in train_loader:
+        for images, labels in tqdm.tqdm(train_loader, desc=f"Эпоха {epoch+1}/{EPOCHS}", leave=False):
             images, labels = images.to(device), labels.to(device)
 
             optimizer.zero_grad()
@@ -84,7 +85,7 @@ if __name__ == "__main__":
         val_loss, correct_val, total_val = 0.0, 0, 0
 
         with torch.no_grad():
-            for images, labels in val_loader:
+            for images, labels in tqdm.tqdm(val_loader, desc="Валидация", leave=False):
                 images, labels = images.to(device), labels.to(device)
                 outputs = model(images)
                 loss = criterion(outputs, labels)

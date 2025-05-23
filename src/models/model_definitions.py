@@ -58,3 +58,17 @@ class AdvancedCNN(nn.Module):  # Крутая сверточная
     def forward(self, x):
         x = self.features(x)
         return self.classifier(x.view(x.size(0), -1))
+
+class MPNN(nn.Module):
+    def __init__(self, input_dim=128, num_classes=29):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(input_dim, 64),
+            nn.ReLU(),
+            nn.Linear(64, 32),
+            nn.ReLU(),
+            nn.Linear(32, num_classes)
+        )
+
+    def forward(self, x):
+        return self.net(x)
